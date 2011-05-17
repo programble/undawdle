@@ -19,6 +19,10 @@ class WebServer < Sinatra::Base
   end
 end
 
+def reload_hosts
+  system(config['reload-hosts'] if config['reload-hosts'])
+end
+
 if Process.euid != 0
   puts "error: this script must be run as root"
   exit 1
@@ -39,7 +43,7 @@ File.open(config['hosts-file'], 'a') do |file|
   end
 end
 
-system(config['restart-networking'])
+reload_hosts
 
 WebServer.run!
 
@@ -47,4 +51,4 @@ File.open(config['hosts-file'], 'w') do |file|
   file << original_hosts
 end
 
-system(config['restart-networking'])
+reload_hosts

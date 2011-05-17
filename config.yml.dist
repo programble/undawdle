@@ -1,5 +1,4 @@
 hosts-file: /etc/hosts
-restart-networking: /etc/init.d/networking restart
 sites:
 - reddit.com
 - forums.somethingawful.com
