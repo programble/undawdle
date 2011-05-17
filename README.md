@@ -15,6 +15,12 @@ TO WORK!
 The script works by editing your `/etc/hosts` file to point time-wasting domains
 to localhost, where it runs a webserver that tells you to "get back to work".
 
+## Usage
+
+    sudo ruby undawdle.rb
+
+Hit control-c to return to dawdling.
+
 ## Dependencies
 
     sudo gem install sinatra
