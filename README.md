@@ -27,17 +27,13 @@ Hit control-c to return to dawdling.
 
 ## Configuration
 
-Arch Linux:
+Linux:
 
-    cp config.yml.dist.arch config.yml
+    cp config.yml.dist config.yml
 
 Mac OS X:
 
     cp config.yml.dist.osx config.yml
-
-Any other linux:
-
-    cp config.yml.dist config.yml
 
 ## License
 
