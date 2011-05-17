@@ -4,7 +4,8 @@ require 'erb'
 require 'sinatra/base'
 require 'yaml'
 
-CONFIG_FILE = File.join(File.dirname(__FILE__), 'config.yml')
+config_file = File.join(File.dirname(__FILE__), 'config.yml')
+config_file = File.join(File.dirname(__FILE__), 'config.yml.dist') unless File.exist?(config_file)
 
 class WebServer < Sinatra::Base
   configure do
@@ -24,14 +25,8 @@ if Process.euid != 0
 end
 
 config = {}
-if File.exist?(CONFIG_FILE)
-  File.open(CONFIG_FILE, 'r') do |f|
-    config = YAML.load(f)
-  end
-else
-  File.open(File.join(File.dirname(__FILE__), 'config.yml.dist'), 'r') do |f|
-    config = YAML.load(f)
-  end
+File.open(config_file, 'r') do |file|
+  config = YAML.load(file)
 end
 
 original_hosts = File.open(config['hosts-file'], 'r').read
