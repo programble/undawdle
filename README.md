@@ -5,7 +5,7 @@
 A script to prevent you from dawdling on the internet when you should be doing
 work!
 
-Essentialling a clone of 
+Essentially a clone of 
 [leftnode/get-shit-done](https://github.com/leftnode/get-shit-done), but with a
 better configuration file and a built-in webserver that tells you to GET BACK
 TO WORK!
