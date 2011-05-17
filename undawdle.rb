@@ -20,7 +20,7 @@ class WebServer < Sinatra::Base
 end
 
 def reload_hosts
-  system(config['reload-hosts'] if config['reload-hosts'])
+  system(config['reload-hosts']) if config['reload-hosts']
 end
 
 if Process.euid != 0
