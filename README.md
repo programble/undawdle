@@ -19,6 +19,20 @@ to localhost, where it runs a webserver that tells you to "get back to work".
 
     sudo gem install sinatra
 
+## Configuration
+
+Arch Linux:
+
+    cp config.yml.dist.arch config.yml
+
+Mac OS X:
+
+    cp config.yml.dist.osx config.yml
+
+Any other linux:
+
+    cp config.yml.dist config.yml
+
 ## License
 
 Copyright (c) 2011, Curtis McEnroe <programble@gmail.com>
