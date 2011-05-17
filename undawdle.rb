@@ -7,6 +7,10 @@ require 'yaml'
 config_file = File.join(File.dirname(__FILE__), 'config.yml')
 config_file = File.join(File.dirname(__FILE__), 'config.yml.dist') unless File.exist?(config_file)
 
+File.open(config_file, 'r') do |file|
+  $config = YAML.load(file)
+end
+
 class WebServer < Sinatra::Base
   configure do
     set :port, 80
@@ -20,7 +24,7 @@ class WebServer < Sinatra::Base
 end
 
 def reload_hosts
-  system(config['reload-hosts']) if config['reload-hosts']
+  system($config['reload-hosts']) if $config['reload-hosts']
 end
 
 if Process.euid != 0
@@ -28,16 +32,11 @@ if Process.euid != 0
   exit 1
 end
 
-config = {}
-File.open(config_file, 'r') do |file|
-  config = YAML.load(file)
-end
+original_hosts = File.open($config['hosts-file'], 'r').read
 
-original_hosts = File.open(config['hosts-file'], 'r').read
-
-File.open(config['hosts-file'], 'a') do |file|
+File.open($config['hosts-file'], 'a') do |file|
   file.puts '#---undawdle---'
-  config['sites'].each do |site|
+  $config['sites'].each do |site|
     file.puts "127.0.0.1 #{site}"
     file.puts "127.0.0.1 www.#{site}"
   end
@@ -47,7 +46,7 @@ reload_hosts
 
 WebServer.run!
 
-File.open(config['hosts-file'], 'w') do |file|
+File.open($config['hosts-file'], 'w') do |file|
   file << original_hosts
 end
 
