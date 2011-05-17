@@ -13,7 +13,7 @@ class WebServer < Sinatra::Base
     set :views, File.join(File.dirname(__FILE__), 'views')
   end
 
-  get // do
+  get %r{} do
     erb :index
   end
 end
